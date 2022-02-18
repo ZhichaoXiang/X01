@@ -1,64 +1,46 @@
 ﻿using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace X01.Relays;
-public class RelayStream : Stream
+namespace X01.Relays
 {
-    readonly Stream _stream;
-    readonly CancellationToken? _ct;
-    Stream stream
+    public class RelayStream : Stream
     {
-        get
+        readonly Cancelable<Stream> _cancelableStream;
+        Stream stream => _cancelableStream;
+        public override bool CanRead => stream.CanRead;
+        public override bool CanSeek => stream.CanSeek;
+        public override bool CanWrite => stream.CanWrite;
+        public override long Length => stream.Length;
+        public override long Position
         {
-            _ct?.ThrowIfCancellationRequested();
-            return (_stream);
+            get => stream.Position;
+            set => stream.Position = value;
         }
-    }
-    public override bool CanRead => stream.CanRead;
-
-    public override bool CanSeek => stream.CanSeek;
-
-    public override bool CanWrite => stream.CanWrite;
-
-    public override long Length => stream.Length;
-
-    public override long Position
-    {
-        get => stream.Position;
-        set => stream.Position = value;
-    }
-    public RelayStream(Stream stream, CancellationToken? ct)
-    {
-        _stream = stream;
-        _ct = ct;
-    }
-    public RelayStream(Stream stream) : this(stream, null)
-    {
-    }
-
-    public override void Flush()
-    {
-        stream.Flush();
-    }
-
-    public override int Read(byte[] buffer, int offset, int count)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override long Seek(long offset, SeekOrigin origin)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void SetLength(long value)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Write(byte[] buffer, int offset, int count)
-    {
-        throw new System.NotImplementedException();
+        public RelayStream(Cancelable<Stream> cancelableStream)
+        {
+            _cancelableStream = cancelableStream;
+        }
+        public RelayStream(Stream stream) : this(new Cancelable<Stream>(stream, null))
+        {
+        }
+        public override void Flush()
+        {
+            stream.Flush();
+        }
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            return (stream.Seek(offset, origin));
+        }
+        public override void SetLength(long value)
+        {
+            stream.SetLength(value);
+        }
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return (stream.Read(buffer, offset, count));
+        }
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            stream.Write(buffer, offset, count);
+        }
     }
 }

@@ -22,5 +22,7 @@ namespace X01
         public Cancelable(TObject obj) : this(obj, null)
         {
         }
+        public static implicit operator TObject(Cancelable<TObject> c) => c.Obj;
+        // public static explicit operator Cancelable<TObject>(TObject b, CancellationToken? ct) => new Cancelable<TObject>(b, ct);
     }
 }
