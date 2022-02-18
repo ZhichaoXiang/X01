@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace X01.Relays
+namespace X01
 {
     public class RelayStream : Stream
     {

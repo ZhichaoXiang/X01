@@ -2,7 +2,7 @@
 
 
 
-namespace X01.Relays
+namespace X01
 {
     public class RelayCommand
     {
