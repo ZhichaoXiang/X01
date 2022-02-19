@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="X01.Core\X01.Core.csproj" />
+    <ProjectReference Include="X01.Extensions\X01.Extensions.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
