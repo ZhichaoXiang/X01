@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace X01
@@ -13,16 +14,16 @@ namespace X01
         // public static readonly Locker LargeMemory;
         static Lockers()
         {
-            LargeMemory = new Locker();
+            AllocateLargeMemory = new Locker();
         }
     }
     public static class LockerExt
     {
         public static void Run(this Locker locker, Action<CancellationToken?> action, int intervalInMilliseconds = 100, CancellationToken? ct = null)
         {
-            CancellationToken ct = new CancellationToken();
+            // CancellationToken ct = new CancellationToken();
 #if DEBUG
-       System.Diagnostics.     Debug.Assert(null != action);
+            System.Diagnostics.Debug.Assert(null != action);
             Debug.Assert(-1 < intervalInMilliseconds);
 #endif
             intervalInMilliseconds = Math.Max(0, intervalInMilliseconds);
