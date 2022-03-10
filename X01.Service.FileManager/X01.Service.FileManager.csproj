@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <UserSecretsId>dotnet-X01.Service.FileManager-C6FA410E-D859-4869-BE9D-3796BFF59E3D</UserSecretsId>
   </PropertyGroup>
 
