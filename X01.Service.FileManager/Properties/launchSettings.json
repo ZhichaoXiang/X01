@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "X01.Service.FileManager": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
